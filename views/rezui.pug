@@ -1,0 +1,31 @@
+html
+  head
+    link(href='css/styles.css' type='text/css' rel='stylesheet')
+    title= title
+  body
+    #header
+        form(action="./login" method="POST")
+            label Username
+            input(type="text" name="username")
+            label Password
+            input(type="password" name="password")
+            button(type="submit") Login
+        form(action="./logout")
+            button(type="submit") Logout
+    #rezui
+        form(action="./listTables" method="POST")
+            label Restaurant
+            select(name="restaurant")
+                each restaurant,key in data['restaurants']
+                    option=key
+            button(type="submit") List Tables
+        if restaurantName
+            p=restaurantName
+            form(action="./reserveTable" method="POST")
+                label Table
+                select(name="tableId")
+                    each table,key in data['restaurants'][restaurantName]['tables']
+                        option=table.tableId
+                button(type="submit") Reserve Table
+            if tableId
+                p=tableId
