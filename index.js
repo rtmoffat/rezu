@@ -3,12 +3,12 @@ let data={};
 data['restaurants']={}
 data['restaurants']["Eat 'n' Park"]={}
 data['restaurants']["Eat 'n' Park"]["tables"]=[]
-data['restaurants']["Eat 'n' Park"]["tables"].push({"tableId":100})
-data['restaurants']["Eat 'n' Park"]["tables"].push({"tableId":200})
+data['restaurants']["Eat 'n' Park"]["tables"].push({"tableId":100,"totalSeats":2,"seatsAvailable":0})
+data['restaurants']["Eat 'n' Park"]["tables"].push({"tableId":200,"totalSeats":4,"seatsAvailable":2})
 data['restaurants']["King's"]={}
 data['restaurants']["King's"]["tables"]=[]
-data['restaurants']["King's"]["tables"].push({"tableId":300})
-data['restaurants']["King's"]["tables"].push({"tableId":400})
+data['restaurants']["King's"]["tables"].push({"tableId":300,"totalSeats":6,"seatsAvailable":4})
+data['restaurants']["King's"]["tables"].push({"tableId":400,"totalSeats":4,"seatsAvailable":1})
 const express = require('express')
 const app = express()
 const port = 3000

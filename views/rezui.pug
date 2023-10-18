@@ -25,7 +25,7 @@ html
                 label Table
                 select(name="tableId")
                     each table,key in data['restaurants'][restaurantName]['tables']
-                        option=table.tableId
+                        option(value=table.tableId)=table.tableId+'-'+table.seatsAvailable+' of '+table.totalSeats+' available.'
                 button(type="submit") Reserve Table
             if tableId
                 p=tableId
