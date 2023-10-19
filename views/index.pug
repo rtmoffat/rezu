@@ -2,13 +2,15 @@ html
   head
     link(href='css/styles.css' type='text/css' rel='stylesheet')
     title= title
+    script(src="./js/rezui.js")
   body
-    #header
-        form(action="./login" method="POST")
+    #header(name="header")
+        form(action="./login" method="POST" target="header")
             label Username
             input(type="text" name="username")
             label Password
             input(type="password" name="password")
             button(type="submit") Login
-        form(action="./logout")
+        form(action="./logout" target="hiddenFrame")
             button(type="submit") Logout
+    iframe(name="hiddenFrame" width="0" height="0" border="0" style="display: none;")

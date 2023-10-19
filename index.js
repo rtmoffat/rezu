@@ -79,7 +79,7 @@ app.post('/login', cors(corsOptions),(req, res) => {
     res.render('rezui',{message:'Welcome!',title:'rezu-ui',data:data})
   })
   app.post('/listTables', cors(corsOptions),(req, res) => {
-    console.log(req.body)
+    console.log('listTables'+req.body)
     res.render('rezui',{restaurantName:req.body.restaurant,message:'Welcome!',title:'rezu-ui',data:data})
   })
   
