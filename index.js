@@ -15,6 +15,7 @@ const port = 3000
 const cors=require('cors')
 const cookieParser = require("cookie-parser");
 var session=require('express-session')
+var bodyParser = require('body-parser')
 const path=require('path')
 const sqlite3 = require('sqlite3');
 require('dotenv').config();
@@ -53,7 +54,7 @@ var sess = {
     sameSite:false,
     path:'/',
     //60000ms = 60 seconds
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 360000 }
 }
 
 if (app.get('env') === 'production') {
@@ -62,6 +63,7 @@ if (app.get('env') === 'production') {
 }
 
 app.use(cookieParser());
+app.use(bodyParser.json())
 app.use(session(sess))
 app.use(express.urlencoded({ extended: true }));
 app.use(auth);
@@ -95,8 +97,9 @@ app.route('/login')
     res.send(data['restaurants'])
   })
   app.post('/listTables', cors(corsOptions),(req, res) => {
-    console.log('listTables'+req.body)
-    res.render('rezui',{restaurantName:req.body.restaurant,message:'Welcome!',title:'rezu-ui',data:data})
+    console.log('listTables'+JSON.stringify(req.body.restaurant))
+    res.send(JSON.stringify(data['restaurants'][req.body.restaurant]['tables']))
+    //res.render('rezui',{restaurantName:req.body.restaurant,message:'Welcome!',title:'rezu-ui',data:data})
   })
   
   app.post('/reserveTable', cors(corsOptions),(req, res) => {

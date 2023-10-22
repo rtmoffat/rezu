@@ -1,0 +1,20 @@
+views
+	login
+	reservation/offer view
+	endpoints
+		listRestaurants
+		getTables
+			needs restaurant id
+			returns json list of tables
+		offer
+			PUT offer table
+				userid
+				restaurant id
+				tableId
+				returns offerid
+			DELETE remove offer
+				200
+		reserve
+			PUT reserve table
+				
+			DELETE reservation

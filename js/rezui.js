@@ -4,6 +4,31 @@ function send(e,form) {
     e.preventDefault();
 }
 
+async function loadTables() {
+  await fetch('./listTables',{
+  method: "POST", // *GET, POST, PUT, DELETE, etc.
+  mode: "cors", // no-cors, *cors, same-origin
+  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  credentials: "same-origin", // include, *same-origin, omit
+  headers: {
+    "Content-Type": "application/json",
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body:JSON.stringify({restaurant:$('#restaurants option:selected').val()})
+}).then((response)=>{
+    response.json()
+      .then((items)=>{
+        $.each(items,(i,item) => {
+          console.log(i)
+          $('#tables').append($('<option>',{
+            value:item.tableId,
+            text:item.tableId+' '+item.totalSeats+' '+item.seatsAvailable
+          }))
+        })
+        console.log(items)
+      }) 
+  })
+}
 
 async function loadRestaurants() {
   await fetch('./listRestaurants',{
@@ -18,6 +43,13 @@ async function loadRestaurants() {
 }).then((response)=>{
     response.json()
       .then((items)=>{
+        $.each(items,(i,item) => {
+          console.log(i)
+          $('#restaurants').append($('<option>',{
+            value:i,
+            text:i
+          }))
+        })
         console.log(items)
       }) 
   })
