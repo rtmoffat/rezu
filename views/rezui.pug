@@ -2,30 +2,12 @@ html
   head
     link(href='css/styles.css' type='text/css' rel='stylesheet')
     title= title
+    script(src="https://code.jquery.com/jquery-3.7.1.min.js")
     script(src="./js/rezui.js")
   body
-    //#header
-      label Username
-      input#username(type="text")
-      label Password
-      input#password(type="password")
-      button(onclick="login()") Login
-      button(onclick="logout()") Logout
-    #rezui
-        form(action="./listTables" method="POST" onsubmit="send(event,this)")
-            label Restaurant
-            select(name="restaurant")
-                each restaurant,key in data['restaurants']
-                    option=key
-            button(type="submit") List Tables
-        if restaurantName
-            p=restaurantName
-            form(action="./reserveTable" method="POST" onsubmit="send(event,this)")
-                label Table
-                select(name="tableId")
-                    each table,key in data['restaurants'][restaurantName]['tables']
-                        option(value=table.tableId)=table.tableId+'-'+table.seatsAvailable+' of '+table.totalSeats+' available.'
-                button(type="submit") Reserve Table
-            if tableId
-                p=tableId
-    iframe(name="hiddenFrame" width="0" height="0" border="0" style="display: none;")
+    #cont
+      select#restaurants(name="restaurant")
+      button(onclick='loadForm()') Get Tables
+      select#tables(name="table")
+      button(onclick='offerTable()') Offer
+      button(onclick='reserveTable()') Rserve

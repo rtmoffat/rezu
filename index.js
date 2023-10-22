@@ -26,7 +26,8 @@ app.set('view engine','pug')
 
 function auth(req,res,next) {
   console.log("in auth")
-  if(req.session || req.path==='/login') {
+  console.log(req.session)
+  if(req.session.userid || req.path==='/login') {
       next();
   } else {
       res.redirect("/login")
@@ -52,7 +53,7 @@ var sess = {
     sameSite:false,
     path:'/',
     //60000ms = 60 seconds
-    cookie: { maxAge: 60000,tester:'hi there!' }
+    cookie: { maxAge: 60000 }
 }
 
 if (app.get('env') === 'production') {
@@ -89,8 +90,9 @@ app.route('/login')
     res.render('login')
   })
 
-  app.post('/listRestaurants', cors(corsOptions),(req, res) => {
-    res.render('rezui',{message:'Welcome!',title:'rezu-ui',data:data})
+  app.get('/listRestaurants', cors(corsOptions),(req, res) => {
+    //res.render('rezui',{message:'Welcome!',title:'rezu-ui',data:data['restaurants']})
+    res.send(data['restaurants'])
   })
   app.post('/listTables', cors(corsOptions),(req, res) => {
     console.log('listTables'+req.body)

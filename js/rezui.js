@@ -2,7 +2,34 @@ function send(e,form) {
     fetch(form.action, {method:'post', body: new FormData(form)})
     console.log('We send post asynchronously (AJAX)');
     e.preventDefault();
+}
+
+
+async function loadRestaurants() {
+  await fetch('./listRestaurants',{
+  method: "GET", // *GET, POST, PUT, DELETE, etc.
+  mode: "cors", // no-cors, *cors, same-origin
+  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  credentials: "same-origin", // include, *same-origin, omit
+  headers: {
+    "Content-Type": "application/json",
+    // 'Content-Type': 'application/x-www-form-urlencoded',
   }
+}).then((response)=>{
+    response.json()
+      .then((items)=>{
+        console.log(items)
+      }) 
+  })
+}
+
+loadRestaurants();
+/*$.each(items, function (i, item) {
+  $('#mySelect').append($('<option>', { 
+      value: item.value,
+      text : item.text 
+  }));
+});*/
 
 async function login() {
   u=document.getElementById('#username')
