@@ -4,7 +4,14 @@ html
     title= title
     script(src="./js/rezui.js")
   body
-    #header(name="header")
+    #header
+      label Username
+      input#username(type="text")
+      label Password
+      input#password(type="password")
+      button(onclick="login()") Login
+      button(onclick="logout()") Logout      
+    //#header(name="header")
         form(action="./login" method="POST" target="header")
             label Username
             input(type="text" name="username")
@@ -13,4 +20,4 @@ html
             button(type="submit") Login
         form(action="./logout" target="hiddenFrame")
             button(type="submit") Logout
-    iframe(name="hiddenFrame" width="0" height="0" border="0" style="display: none;")
+    //iframe(name="hiddenFrame" width="0" height="0" border="0" style="display: none;")

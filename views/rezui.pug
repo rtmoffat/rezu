@@ -4,15 +4,13 @@ html
     title= title
     script(src="./js/rezui.js")
   body
-    #header
-        form(action="./login" method="POST" target="hiddenFrame")
-            label Username
-            input(type="text" name="username")
-            label Password
-            input(type="password" name="password")
-            button(type="submit") Login
-        form(action="./logout")
-            button(type="submit") Logout
+    //#header
+      label Username
+      input#username(type="text")
+      label Password
+      input#password(type="password")
+      button(onclick="login()") Login
+      button(onclick="logout()") Logout
     #rezui
         form(action="./listTables" method="POST" onsubmit="send(event,this)")
             label Restaurant

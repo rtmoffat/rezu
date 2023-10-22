@@ -24,6 +24,14 @@ app.use(express.static(path.join(__dirname, '/')))
 
 app.set('view engine','pug')
 
+function auth(req,res,next) {
+  console.log("in auth")
+  if(req.session || req.path==='/login') {
+      next();
+  } else {
+      res.redirect("/login")
+  }
+}
 
 function queryDb() {
     console.log("saving");
@@ -55,6 +63,7 @@ if (app.get('env') === 'production') {
 app.use(cookieParser());
 app.use(session(sess))
 app.use(express.urlencoded({ extended: true }));
+app.use(auth);
 
 
 var corsOptions = {
@@ -64,17 +73,22 @@ var corsOptions = {
 
 app.get('/', (req, res) => {
   //res.send('Hello World!')
-  res.render('index',{message:'hello',title:'rezu'})
+  res.render('rezui',{message:'Welcome to rez!',title:'rez-ui',data:data})
 })
-
-app.post('/login', cors(corsOptions),(req, res) => {
+app.route('/login')
+  .post(cors(corsOptions),(req, res) => {
     session=req.session;
     session.userid='bob';
     console.log(req.session)
     console.log('logged in'+req.session)
     //res.redirect('/')
-    res.render('rezui',{message:'Welcome!',title:'rezu-ui',data:data})
+    res.redirect('/')
   })
+    //res.render('rezui',{message:'Welcome!',title:'rezu-ui',data:data})
+  .get((req,res) => {
+    res.render('login')
+  })
+
   app.post('/listRestaurants', cors(corsOptions),(req, res) => {
     res.render('rezui',{message:'Welcome!',title:'rezu-ui',data:data})
   })
